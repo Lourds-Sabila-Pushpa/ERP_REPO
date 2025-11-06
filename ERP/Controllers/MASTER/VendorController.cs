@@ -120,6 +120,7 @@ namespace ERP.Controllers.MASTER
             }
         }
 
+        //this tis to check the vendor exist or not
         private bool VendorExists(int id)
         {
             return _context.Vendor.Any(e => e.ID == id);
