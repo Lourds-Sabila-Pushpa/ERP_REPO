@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\ACCOUNTS\" />
+    <Folder Include="Controllers\CRM\" />
+    <Folder Include="Controllers\WAREHOUSE\" />
+    <Folder Include="Controllers\RECEIVING\" />
+    <Folder Include="Controllers\POS\" />
+    <Folder Include="Controllers\SALES\" />
+    <Folder Include="Controllers\WORKSHOP\" />
+    <Folder Include="Data\CRM\" />
+    <Folder Include="Data\ACCOUNTS\" />
+    <Folder Include="Data\MASTER\" />
+    <Folder Include="Data\SALES\" />
+    <Folder Include="Data\POS\" />
+    <Folder Include="Data\RECEIVING\" />
+    <Folder Include="Data\WAREHOUSE\" />
+    <Folder Include="Data\WORKSHOP\" />
+    <Folder Include="Entities\MASTER\" />
+    <Folder Include="Entities\ACCOUNTS\" />
+    <Folder Include="Entities\CRM\" />
+    <Folder Include="Entities\WORKSHOP\" />
+    <Folder Include="Entities\WAREHOUSE\" />
+    <Folder Include="Entities\RECEIVING\" />
+    <Folder Include="Entities\POS\" />
+    <Folder Include="Entities\SALES\" />
+    <Folder Include="Interfaces\MASTER\" />
+    <Folder Include="Interfaces\ACCOUNTS\" />
+    <Folder Include="Interfaces\CRM\" />
+    <Folder Include="Interfaces\WAREHOUSE\" />
+    <Folder Include="Interfaces\RECEIVING\" />
+    <Folder Include="Interfaces\POS\" />
+    <Folder Include="Interfaces\SALES\" />
+    <Folder Include="Interfaces\WORKSHOP\" />
+    <Folder Include="Models\CRM\" />
+    <Folder Include="Models\ACCOUNTS\" />
+    <Folder Include="Models\SALES\" />
+    <Folder Include="Models\POS\" />
+    <Folder Include="Models\RECEIVING\" />
+    <Folder Include="Models\WAREHOUSE\" />
+    <Folder Include="Models\WORKSHOP\" />
+    <Folder Include="Repositories\MASTER\" />
+    <Folder Include="Repositories\ACCOUNTS\" />
+    <Folder Include="Repositories\CRM\" />
+    <Folder Include="Repositories\WORKSHOP\" />
+    <Folder Include="Repositories\WAREHOUSE\" />
+    <Folder Include="Repositories\RECEIVING\" />
+    <Folder Include="Repositories\POS\" />
+    <Folder Include="Repositories\SALES\" />
+  </ItemGroup>
+
+</Project>
