@@ -120,7 +120,7 @@ namespace ERP.Controllers.MASTER
             }
         }
 
-        //this is ur
+        //this is url
         private bool VendorExists(int id)
         {
             return _context.Vendor.Any(e => e.ID == id);
