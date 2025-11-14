@@ -63,7 +63,7 @@ export class VendorComponent implements OnInit {
         error: (err) => console.error('Error adding vendor:', err),
       });
     } else {
-      this.vendorService.update(this.vendor.id, this.vendor).subscribe({
+      this.vendorService.update(this.vendor.vendor, this.vendor).subscribe({
         next: () => {
           alert('Vendor updated successfully!');
           this.vendor = new Vendor();
@@ -80,9 +80,9 @@ export class VendorComponent implements OnInit {
     this.isEditing = true;
   }
 
-  onDelete(id: number) {
+  onDelete(vendorCode: string) {
     if (confirm('Are you sure you want to delete this vendor?')) {
-      this.vendorService.delete(id).subscribe({
+      this.vendorService.delete(vendorCode).subscribe({
         next: () => {
           alert('Vendor deleted successfully!');
           this.loadVendors();

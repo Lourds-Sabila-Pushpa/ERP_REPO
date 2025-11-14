@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { VendorComponent } from './MASTER/vendor/vendor.component';
+import { PurchaseOrderComponent } from './MASTER/purchase-order/purchase-order.component';
 
 export const routes: Routes = [
-  { path: '', component: VendorComponent },
-  { path: 'vendor', component: VendorComponent }
+  { path: '', component: PurchaseOrderComponent },
+  { path: 'purchase-order', component: PurchaseOrderComponent }
 ];

@@ -4,6 +4,7 @@ using ERP.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251112133315_updated")]
+    partial class updated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,23 +189,6 @@ namespace ERP.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("DOCSRL");
 
-                    b.Property<string>("CreateBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATEBY");
-
-                    b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("CreateRemarks")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("CREATEREMARKS");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("CREATETM");
-
                     b.Property<decimal>("DISCOUNT")
                         .HasColumnType("numeric(22,0)");
 
@@ -240,24 +226,6 @@ namespace ERP.Migrations
 
                     b.Property<decimal>("TOTALVALUE")
                         .HasColumnType("numeric(22,0)");
-
-                    b.Property<string>("UpdateBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("UPDATEBY");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("date")
-                        .HasColumnName("UPDATEDT");
-
-                    b.Property<string>("UpdateRemarks")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("UPDATEMARKS");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("UPDATETM");
 
                     b.Property<decimal>("VATPERCENTAGE")
                         .HasColumnType("numeric(22,0)");
@@ -298,26 +266,23 @@ namespace ERP.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("DOCNO");
 
-                    b.Property<string>("CURRENCY")
+                    b.Property<string>("CREATEBY")
                         .IsRequired()
                         .HasColumnType("varchar(10)");
 
-                    b.Property<string>("CreateBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATEBY");
-
-                    b.Property<DateTime?>("CreateDate")
+                    b.Property<DateOnly>("CREATEDT")
                         .HasColumnType("date");
 
-                    b.Property<string>("CreateRemarks")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("CREATEREMARKS");
+                    b.Property<string>("CREATEREMARKS")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
 
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("CREATETM");
+                    b.Property<DateTime>("CREATETM")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CURRENCY")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.Property<decimal>("DISCOUNT")
                         .HasColumnType("numeric(22,0)");
@@ -331,36 +296,22 @@ namespace ERP.Migrations
                     b.Property<decimal>("NOOFITEMS")
                         .HasColumnType("numeric(22,0)");
 
-                    b.Property<string>("SEQNO")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("SEQNO");
-
-                    b.Property<string>("SEQNOPREFIX")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("SEQNOPREFIX");
-
                     b.Property<decimal>("TOTALVALUE")
                         .HasColumnType("numeric(22,0)");
 
-                    b.Property<string>("UpdateBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("UPDATEBY");
+                    b.Property<string>("UPDATEBY")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("date")
-                        .HasColumnName("UPDATEDT");
+                    b.Property<DateOnly>("UPDATEDT")
+                        .HasColumnType("date");
 
-                    b.Property<string>("UpdateRemarks")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("UPDATEMARKS");
+                    b.Property<string>("UPDATEMARKS")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
 
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("UPDATETM");
+                    b.Property<DateTime>("UPDATETM")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("VENDORREFNO")
                         .IsRequired()
@@ -386,22 +337,19 @@ namespace ERP.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("CreateBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATEBY");
+                    b.Property<string>("CREATEBY")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime?>("CreateDate")
+                    b.Property<DateOnly>("CREATEDT")
                         .HasColumnType("date");
 
-                    b.Property<string>("CreateRemarks")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("CREATEREMARKS");
+                    b.Property<string>("CREATEREMARKS")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
 
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("CREATETM");
+                    b.Property<DateTime>("CREATETM")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("EMAIL")
                         .IsRequired()
@@ -425,23 +373,19 @@ namespace ERP.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("UpdateBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("UPDATEBY");
+                    b.Property<string>("UPDATEBY")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("date")
-                        .HasColumnName("UPDATEDT");
+                    b.Property<DateOnly>("UPDATEDT")
+                        .HasColumnType("date");
 
-                    b.Property<string>("UpdateRemarks")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("UPDATEMARKS");
+                    b.Property<string>("UPDATEMARKS")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
 
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("UPDATETM");
+                    b.Property<DateTime>("UPDATETM")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("VATNO")
                         .IsRequired()

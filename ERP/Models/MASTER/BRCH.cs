@@ -1,36 +1,33 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ERP.Models.MASTER
 {
-    [Table("FRAN")]
-    public class FRAN
+    public class BRCH
     {
+        [Key, Column("BRCH")]
+        [StringLength(10)]
+        public string BranchCode { get; set; } = string.Empty;
 
-        [Key]
         [Column("FRAN")]
         [StringLength(10)]
-        [Required(ErrorMessage = "Franchise Code is required.")]
         public string FranCode { get; set; } = string.Empty;
 
+        [ForeignKey(nameof(FranCode))]
+        public FRAN? FRAN { get; set; }
+
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
-        // 🔹 Franchise Name
-        [Required(ErrorMessage = "Name is required.")]
-        [Column("NAME")]
         [StringLength(100)]
-        public string Name { get; set; } = string.Empty;
+        public string NAME { get; set; } = string.Empty;
 
-        // 🔹 Arabic Name
-        [Required(ErrorMessage = "Arabic Name is required.")]
-        [Column("NAMEAR")]
         [StringLength(100)]
-        public string NameAr { get; set; } = string.Empty;
+        public string NAMEAR { get; set; } = string.Empty;
 
         // 🔹 Creation Date
-        [Column("CREATEDT", TypeName = "date")]
+        [Column(TypeName = "date")]
         public DateTime? CreateDate { get; set; } = DateTime.Now;
 
         // 🔹 Creation Time

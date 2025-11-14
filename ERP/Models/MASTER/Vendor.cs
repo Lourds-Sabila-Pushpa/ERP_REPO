@@ -8,13 +8,12 @@ namespace ERP.Models.MASTER
 {
     public class Vendor
     {
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-
+        [Key]
         [Column(TypeName = "varchar(10)")]
-        public string VENDOR { get; set; } = "";
+        public string VENDOR { get; set; } = string.Empty;
 
 
         [Column(TypeName = "varchar(100)")]
@@ -41,32 +40,28 @@ namespace ERP.Models.MASTER
         public string VATNO { get; set; } = "";
 
 
-        [JsonIgnore]
-        public DateOnly CREATEDT { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        [Column(TypeName = "date")]
+        public DateTime? CreateDate { get; set; } = DateTime.Now;
 
-        [JsonIgnore]
-        public DateTime CREATETM { get; set; } = DateTime.Now;
+        [Column("CREATETM", TypeName = "datetime")]
+        public DateTime? CreateTime { get; set; } = DateTime.Now;
 
-        [JsonIgnore]
-        [Column(TypeName = "varchar(10)")]
-        public string CREATEBY { get; set; } = "";
+        [Column("CREATEBY"), StringLength(10)]
+        public string? CreateBy { get; set; }
 
-        [JsonIgnore]
-        [Column(TypeName = "varchar(200)")]
-        public string CREATEREMARKS { get; set; } = "";
+        [Column("CREATEREMARKS"), StringLength(200)]
+        public string? CreateRemarks { get; set; }
 
-        [JsonIgnore]
-        public DateOnly UPDATEDT { get; set; } = new DateOnly(1900, 1, 1);
+        [Column("UPDATEDT", TypeName = "date")]
+        public DateTime? UpdateDate { get; set; }
 
-        [JsonIgnore]
-        public DateTime UPDATETM { get; set; } = new DateTime(1900, 1, 1);
+        [Column("UPDATETM", TypeName = "datetime")]
+        public DateTime? UpdateTime { get; set; }
 
-        [JsonIgnore]
-        [Column(TypeName = "varchar(10)")]
-        public string UPDATEBY { get; set; } = "";
+        [Column("UPDATEBY"), StringLength(10)]
+        public string? UpdateBy { get; set; }
 
-        [JsonIgnore]
-        [Column(TypeName = "varchar(200)")]
-        public string UPDATEMARKS { get; set; } = "";
+        [Column("UPDATEMARKS"), StringLength(200)]
+        public string? UpdateRemarks { get; set; }
     }
 }

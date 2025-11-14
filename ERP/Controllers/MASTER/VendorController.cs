@@ -29,10 +29,10 @@ namespace ERP.Controllers.MASTER
         }
 
         // GET: api/Vendor/1
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Vendor>> GetVendor(int id)
+        [HttpGet("{vendorCode}")]
+        public async Task<ActionResult<Vendor>> GetVendor(string vendorCode)
         {
-            var vendorID = await _context.Vendor.FindAsync(id);
+            var vendorID = await _context.Vendor.FindAsync(vendorCode);
 
             if (vendorID == null)
             {
@@ -44,15 +44,27 @@ namespace ERP.Controllers.MASTER
 
         // PUT: api/Vendor/V1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVendor(int id, Vendor vendordet)
+        [HttpPut("{vendorCode}")]
+        public async Task<IActionResult> PutVendor(string vendorCode, Vendor vendordet)
         {
-            if (id != vendordet.ID)
+            if (vendorCode != vendordet.VENDOR)
             {
                 return BadRequest();
             }
 
-            _context.Entry(vendordet).State = EntityState.Modified;
+            var existingVendor = await _context.Vendor.FindAsync(vendorCode);
+
+            if (existingVendor == null)
+            {
+                return NotFound($"Vendor {vendorCode} not found.");
+            }
+
+            existingVendor.NAME = vendordet.NAME;
+            existingVendor.NAMEAR = vendordet.NAMEAR;
+            existingVendor.PHONE = vendordet.PHONE;
+            existingVendor.EMAIL = vendordet.EMAIL;
+            existingVendor.ADDRESS = vendordet.ADDRESS;
+            existingVendor.VATNO = vendordet.VATNO;
 
             try
             {
@@ -60,7 +72,7 @@ namespace ERP.Controllers.MASTER
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VendorExists(id))
+                if (!VendorExists(vendorCode))
                 {
                     return NotFound();
                 }
@@ -81,12 +93,12 @@ namespace ERP.Controllers.MASTER
             _context.Vendor.Add(vendor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVendor", new { id = vendor.ID }, vendor);
+            return CreatedAtAction("GetVendor", new { vendor = vendor.VENDOR }, vendor);
         }
 
         // DELETE: api/Vendor/V1
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVendor(int id)
+        [HttpDelete("{vendorCode}")]
+        public async Task<IActionResult> DeleteVendor(string vendorCode)
         {
             //var vendorID = await _context.Vendor.FindAsync(id);
             //if (vendorID == null)
@@ -99,10 +111,10 @@ namespace ERP.Controllers.MASTER
 
             //return NoContent();
 
-            Console.WriteLine($"Delete request received for ID: {id}");
+            Console.WriteLine($"Delete request received for ID: {vendorCode}");
             try
             {
-                var vendor = await _context.Vendor.FindAsync(id);
+                var vendor = await _context.Vendor.FindAsync(vendorCode);
                 if (vendor == null)
                 {
                     return NotFound();
@@ -121,9 +133,9 @@ namespace ERP.Controllers.MASTER
         }
 
         //this is url oqytt
-        private bool VendorExists(int id)
+        private bool VendorExists(string vendor)
         {
-            return _context.Vendor.Any(e => e.ID == id);
+            return _context.Vendor.Any(e => e.VENDOR == vendor);
         }
     }
 }

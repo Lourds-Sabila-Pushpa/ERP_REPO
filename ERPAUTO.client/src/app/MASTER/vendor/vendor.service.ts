@@ -24,13 +24,13 @@ export class VendorService {
   }
 
   // ✅ PUT update vendor (by ID)
-  update(id: number, vendordet: Vendor): Observable<void> {
-    return this.http.put<void>(`${this.url}/${id}`, vendordet);
+  update(vendorCode: string, vendordet: Vendor): Observable<void> {
+    return this.http.put<void>(`${this.url}/${vendorCode}`, vendordet);
   }
 
   // ✅ DELETE vendor (by ID)
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`);
+  delete(vendorCode: string): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${vendorCode}`);
   }
 
   // ✅ Refresh list (optional, for local caching)

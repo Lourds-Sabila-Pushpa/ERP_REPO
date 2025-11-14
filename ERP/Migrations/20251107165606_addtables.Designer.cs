@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251106062306_adduptab")]
-    partial class adduptab
+    [Migration("20251107165606_addtables")]
+    partial class addtables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,8 +51,11 @@ namespace ERP.Migrations
                         .HasColumnName("CREATETM");
 
                     b.Property<decimal>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("numeric(22, 0)")
                         .HasColumnName("ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -89,13 +92,95 @@ namespace ERP.Migrations
                     b.ToTable("FRAN");
                 });
 
+            modelBuilder.Entity("ERP.Models.MASTER.PurchaseOrder", b =>
+                {
+                    b.Property<string>("FRAN")
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("BRCH")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("WHSE")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("DOCTYPE")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("DOCNO")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("VENDOR")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("CREATEBY")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<DateOnly>("CREATEDT")
+                        .HasColumnType("date");
+
+                    b.Property<string>("CREATEREMARKS")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime>("CREATETM")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CURRENCY")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<decimal>("DISCOUNT")
+                        .HasColumnType("numeric(22,0)");
+
+                    b.Property<DateOnly>("DOCDT")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("numeric(22,0)");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("ID"));
+
+                    b.Property<decimal>("NOOFITEMS")
+                        .HasColumnType("numeric(22,0)");
+
+                    b.Property<decimal>("TOTALVALUE")
+                        .HasColumnType("numeric(22,0)");
+
+                    b.Property<string>("UPDATEBY")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<DateOnly>("UPDATEDT")
+                        .HasColumnType("date");
+
+                    b.Property<string>("UPDATEMARKS")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime>("UPDATETM")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("VENDORREFNO")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("VENDORREFTYPE")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.HasKey("FRAN", "BRCH", "WHSE", "DOCTYPE", "DOCNO", "VENDOR");
+
+                    b.HasIndex("VENDOR");
+
+                    b.ToTable("purchaseOrder");
+                });
+
             modelBuilder.Entity("ERP.Models.MASTER.Vendor", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("VENDOR")
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("ADDRESS")
                         .IsRequired()
@@ -113,11 +198,17 @@ namespace ERP.Migrations
                         .HasColumnType("varchar(200)");
 
                     b.Property<DateTime>("CREATETM")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("EMAIL")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
+
+                    b.Property<decimal>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("numeric(22,0)");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("ID"));
 
                     b.Property<string>("NAME")
                         .IsRequired()
@@ -143,19 +234,34 @@ namespace ERP.Migrations
                         .HasColumnType("varchar(200)");
 
                     b.Property<DateTime>("UPDATETM")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("VATNO")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("VENDOR")
-                        .IsRequired()
-                        .HasColumnType("varchar(10)");
-
-                    b.HasKey("ID");
+                    b.HasKey("VENDOR");
 
                     b.ToTable("Vendor");
+                });
+
+            modelBuilder.Entity("ERP.Models.MASTER.PurchaseOrder", b =>
+                {
+                    b.HasOne("ERP.Models.MASTER.FRAN", "Fran")
+                        .WithMany()
+                        .HasForeignKey("FRAN")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ERP.Models.MASTER.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VENDOR")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Fran");
+
+                    b.Navigation("Vendor");
                 });
 #pragma warning restore 612, 618
         }
